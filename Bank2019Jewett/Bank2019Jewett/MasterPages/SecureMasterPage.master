@@ -1,0 +1,10 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/MasterPages/OutsideMasterPage.Master" AutoEventWireup="true" CodeBehind="SecureMasterPage.master.cs" Inherits="Bank2019Jewett.MasterPages.SecureMasterPage" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="cphMain" runat="server">
+    <%if (Session["UserID"] != null)
+        {%>
+      <asp:ContentPlaceHolder ID="cphMain" runat="server">
+
+      </asp:ContentPlaceHolder>
+    <%}%>
+</asp:Content>

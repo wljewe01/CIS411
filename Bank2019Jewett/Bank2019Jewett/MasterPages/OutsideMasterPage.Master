@@ -1,0 +1,86 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="OutsideMasterPage.master.cs" Inherits="Bank2019Jewett.MasterPages.OutsideMasterPage" %>
+ <link rel="stylesheet" href="/StylesCSS/StyleSheet1.css" type="text/css" runat="server"/> 
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    
+    <title>Mortgage Calculator</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+    <style type="text/css">
+        .auto-style1 {
+            width: 208px;
+            height: 218px;
+        }
+        .auto-style4 {
+            height: 42px;
+        }
+    </style>
+
+</head>
+<div class ="im"><img alt="calclator" class="auto-style1" src="/App_Themes/Theme1/calculator.jpg" /></div>
+ <div class ="header"><h2>Mortgage Calculator</h2></div>
+<body>
+
+    <form id="form1" runat="server">
+   <div>
+            <table width="100%">
+                <tr>
+                    <td class="auto-style4">           
+                        <table>
+                            <tr>
+                                 <td class ="links"><a href="../Pages/ManageUser.aspx">Manage User</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="../Pages/ManageCustomer.aspx">Manage Customer</a>&nbsp;&nbsp;&nbsp;&nbsp; <a href="../Pages/ManageLoans.aspx">Manage Loans</a>&nbsp;&nbsp;&nbsp; <a href="../Pages/SignUp.aspx">Sign Up</a></td></td>                 
+                                 <td>
+                                     <asp:FormView ID="FormView1" runat="server" DataSourceID="sourceUserInfo" OnPageIndexChanging="FormView1_PageIndexChanging">
+                                         <EditItemTemplate>
+                                             vcFirstName:
+                                             <asp:TextBox ID="vcFirstNameTextBox" runat="server" Text='<%# Bind("vcFirstName") %>' />
+                                             <br />
+                                             <asp:LinkButton ID="UpdateButton" runat="server" CausesValidation="True" CommandName="Update" Text="Update" />
+                                             &nbsp;<asp:LinkButton ID="UpdateCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" />
+                                         </EditItemTemplate>
+                                         <EmptyDataTemplate>
+                                             <asp:Button ID="btnLogin2" runat="server" OnClick="btnLogin2_Click" Text="Log In Here" />
+                                         </EmptyDataTemplate>
+                                         <InsertItemTemplate>
+                                             vcFirstName:
+                                             <asp:TextBox ID="vcFirstNameTextBox" runat="server" Text='<%# Bind("vcFirstName") %>' />
+                                             <br />
+                                             <asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" CommandName="Insert" Text="Insert" />
+                                             &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" />
+                                         </InsertItemTemplate>
+                                         <ItemTemplate>
+                                             Hi
+                                             <asp:Label ID="vcFirstNameLabel" runat="server" Text='<%# Bind("vcFirstName") %>' />
+                                             !<br />
+                                             <br />
+                                             <asp:Button class ="mybtn" ID="btnLogout" runat="server" OnClick="btnLogout_Click" Text="Log Out" />
+                                         </ItemTemplate>
+                                     </asp:FormView>
+
+                                      <asp:SqlDataSource ID="sourceUserInfo" runat="server" ConnectionString="<%$ ConnectionStrings:CIS41100ConnectionString3 %>" SelectCommand="SELECT [vcFirstName] FROM [tblJewettUser] WHERE ([UserID] = UserID)">
+                                         <SelectParameters>
+                                             <asp:SessionParameter DefaultValue="0" Name="CustomerID" SessionField="UserId" Type="Int32" />
+                                         </SelectParameters>
+                                     </asp:SqlDataSource>
+                                 </td>
+                            </tr>
+                        </table>
+                         </td>
+                </tr>
+                 <tr>
+                    <td>
+                        <asp:ContentPlaceHolder ID="cphMain" runat="server">
+                        </asp:ContentPlaceHolder>
+                  </td>
+                </tr>
+            </table>
+
+
+            
+        </div>
+    </form>
+</body>
+</html>
